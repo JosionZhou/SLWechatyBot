@@ -61,14 +61,19 @@ class app {
                 logger.info(`开始通知消息：${sayDataStr}`);
                 wechatyBot.say(sayData).then(sayResult => {
                     if (sayResult) {
-                        logger.info(`通知消息成功：MessageId.${sayResult.id},消息内容${sayDataStr}`)
+                        logger.info(`消息发送成功：MessageId.${sayResult.id},消息内容${sayDataStr}`);
+                        console.log(`消息发送成功：MessageId.${sayResult.id}`);
                         res.send({
                             Success: true,
                             Id: sayResult.id
                         });
+                    } else {
+                        logger.info(`消息发送失败：${sayResult}`);
+                        console.log(`消息发送失败：${sayResult}`);
                     }
                 }).catch(err => {
                     logger.info(`消息发送失败：${err},消息内容${sayDataStr}`);
+                    console.log(`消息发生失败：${err}`);
                     // logger.error(err+"");
                     res.send({
                         Success: false,

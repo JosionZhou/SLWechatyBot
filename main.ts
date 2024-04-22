@@ -193,8 +193,6 @@ class WechatyBot {
         //   url: "https://www.sl56.com/Problem/Link?data=5Nv2TmwC6cvH7nIwKgZHDE3oUv6WUGe5",
         // });
         let result = await room.say(sayMessage);
-        if (result)
-          console.log("发送消息结果：",result.id);
         return result;
       } else {
         throw new Error(`找不到群名称为:[${reqData.RoomName}]的群聊`);
@@ -203,8 +201,6 @@ class WechatyBot {
       let customerConcat = await this.bot.Contact.find({ name: reqData.CustomerName });
       if (customerConcat) {
         let result = await customerConcat.say(sayMessage);
-        if(result)
-          console.log("发送消息结果：", result.id);
         return result;
       } else {
         throw new Error(`找不到名称为:[${reqData.CustomerName}]的联系人`);
