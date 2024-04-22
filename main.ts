@@ -185,6 +185,10 @@ class WechatyBot {
     }
     if (reqData.SayType == 1) {
       let room = await this.bot.Room.find({ topic: reqData.RoomName });
+      let allRooms = await this.bot.Room.findAll();
+      if (!this.bot.isLoggedIn) {
+        throw new Error("未成功登录，消息发送失败");
+      }
       if (room) {
         // let url = new this.bot.UrlLink({
         //   description: `您好,单号:123456789,有问题:[待提供发票]需要处理。`,
@@ -195,6 +199,8 @@ class WechatyBot {
         let result = await room.say(sayMessage);
         return result;
       } else {
+        console.log("allRoomsCount:", allRooms.length);
+        console.log("allRooms:", allRooms);
         throw new Error(`找不到群名称为:[${reqData.RoomName}]的群聊`);
       }
     } else {
