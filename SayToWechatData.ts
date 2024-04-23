@@ -36,12 +36,14 @@ type WechatMessage = {
  * 回复微信消息的数据对象
  * @param SayType 回复消息的类型 0：对单人回复  1：对群回复
  * @param CustomerName 客户名，对单人回复时使用
+ * @param CustomerName 客户代码，匹配群名后缀时用到
  * @param RoomName 群名，对群回复时使用
  * @param Message 回复的消息内容
  */
 export type SayToWechatData = {
     SayType: number;
     CustomerName?: string;
+    CustomerNo: string;
     RoomName?: string;
     Message: WechatMessage;
 }

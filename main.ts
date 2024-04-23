@@ -184,7 +184,8 @@ class WechatyBot {
         break;
     }
     if (reqData.SayType == 1) {
-      let room = await this.bot.Room.find({ topic: reqData.RoomName });
+      let roomNameReg = new RegExp(`.*${reqData.CustomerNo}`,"gi");
+      let room = await this.bot.Room.find({ topic: roomNameReg });
       let allRooms = await this.bot.Room.findAll();
       if (!this.bot.isLoggedIn) {
         throw new Error("未成功登录，消息发送失败");
@@ -201,7 +202,7 @@ class WechatyBot {
       } else {
         console.log("allRoomsCount:", allRooms.length);
         console.log("allRooms:", allRooms);
-        throw new Error(`找不到群名称为:[${reqData.RoomName}]的群聊`);
+        throw new Error(`找不到群名称后缀为:[${reqData.CustomerNo}]的群聊`);
       }
     } else {
       let customerConcat = await this.bot.Contact.find({ name: reqData.CustomerName });
