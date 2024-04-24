@@ -197,8 +197,12 @@ class WechatyBot {
         //   title: "问题件自助处理",
         //   url: "https://www.sl56.com/Problem/Link?data=5Nv2TmwC6cvH7nIwKgZHDE3oUv6WUGe5",
         // });
-        let result = await room.say(sayMessage);
-        return result;
+        if (room.payload?.memberIdList.indexOf(this.bot.currentUser.payload!.id) != -1) {
+          let result = await room.say(sayMessage);
+          return result;
+        } else {
+          throw new Error("当前用户不存在于聊天组,可能已被移出群聊");
+        }
       } else {
         console.log("allRoomsCount:", allRooms.length);
         console.log("allRooms:", allRooms);
