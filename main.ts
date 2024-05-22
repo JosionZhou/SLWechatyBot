@@ -184,7 +184,7 @@ class WechatyBot {
         break;
     }
     if (reqData.SayType == 1) {
-      let roomNameReg = new RegExp(`.*${reqData.CustomerNo}`,"gi");
+      let roomNameReg = new RegExp(`.*#${reqData.CustomerNo}$`, "gi");
       let room = await this.bot.Room.find({ topic: roomNameReg });
       let allRooms = await this.bot.Room.findAll();
       if (!this.bot.isLoggedIn) {
