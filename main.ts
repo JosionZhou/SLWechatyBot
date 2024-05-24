@@ -204,8 +204,10 @@ class WechatyBot {
           throw new Error("当前用户不存在于聊天组,可能已被移出群聊");
         }
       } else {
-        console.log("allRoomsCount:", allRooms.length);
-        console.log("allRooms:", allRooms);
+        console.log("not found topic:", reqData.CustomerNo);
+        allRooms.forEach(async room => {
+          console.log(await room.topic());
+        });
         throw new Error(`找不到群名称后缀为:[${reqData.CustomerNo}]的群聊`);
       }
     } else {
