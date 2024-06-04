@@ -76,7 +76,7 @@ class WechatyBot {
 
       .on("message", async (message) => {
         // console.log("接收消息：", message);
-        log.info(LOGPRE, `on message: ${message.toString()}`);
+        //log.info(LOGPRE, `on message: ${message.toString()}`);
         // logger.info(`OnMessage:${message.toString()}`);
 
         // await getMessagePayload(message);
@@ -205,9 +205,9 @@ class WechatyBot {
         }
       } else {
         console.log("Rooms Count:", allRooms.length);
-        allRooms.forEach(async room => {
-          console.log(await room.topic());
-        });
+        // allRooms.forEach(async room => {
+        //   console.log(await room.topic());
+        // });
         throw new Error(`找不到群名称后缀为:[${reqData.CustomerNo}]的群聊`);
       }
     } else {
