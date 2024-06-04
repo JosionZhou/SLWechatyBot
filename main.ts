@@ -205,7 +205,7 @@ class WechatyBot {
           throw new Error("当前用户不存在于聊天组,可能已被移出群聊");
         }
       } else {
-        console.log("not found topic:", reqData.CustomerNo);
+        console.log("Rooms Count:", allRooms.length);
         allRooms.forEach(async room => {
           console.log(await room.topic());
         });
