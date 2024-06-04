@@ -4,7 +4,7 @@ import querystring from "querystring";
 import util from "util";
 import express from "express";
 import bodyParser from "body-parser";
-import { Express} from "express-serve-static-core";
+import { Express } from "express-serve-static-core";
 import AppSetting from "./AppSetting";
 import { SayToWechatData } from "./SayToWechatData";
 import Logger from "./logger";
@@ -54,34 +54,34 @@ class app {
 
         exp.post("/", function (req: any, res: any) {
             // 拿到请求体
-            console.log(req.body);
+            //console.log(req.body);
             try {
                 let sayData: SayToWechatData = req.body;
                 let sayDataStr = JSON.stringify(sayData);
-                logger.info(`开始通知消息：${sayDataStr}`);
+                //logger.info(`开始通知消息：${sayDataStr}`);
                 wechatyBot.say(sayData).then(sayResult => {
                     if (sayResult) {
-                        logger.info(`消息发送成功：MessageId.${sayResult.id},消息内容${sayDataStr}`);
-                        console.log(`消息发送成功：MessageId.${sayResult.id}`);
+                        //logger.info(`消息发送成功：MessageId.${sayResult.id},消息内容${sayDataStr}`);
+                        //console.log(`消息发送成功：MessageId.${sayResult.id}`);
                         res.send({
                             Success: true,
                             Id: sayResult.id
                         });
                     } else {
-                        logger.info(`消息发送失败：${sayResult}`);
+                        //logger.info(`消息发送失败：${sayResult}`);
                         console.log(`消息发送失败：${sayResult}`);
                     }
                 }).catch(err => {
-                    logger.info(`消息发送失败：${err},消息内容${sayDataStr}`);
+                    //logger.info(`消息发送失败：${err},消息内容${sayDataStr}`);
                     console.log(`消息发生失败：${err}`);
                     // logger.error(err+"");
                     res.send({
                         Success: false,
-                        Message: err+""
+                        Message: err + ""
                     });
                 });
             } catch (err) {
-                logger.error(err+"");
+                logger.error(err + "");
             }
         });
         exp.listen(AppSetting.Port, () => {
