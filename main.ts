@@ -137,6 +137,7 @@ class WechatyBot {
           LOGPRE,
           `on room-topic, room:${room}, newTopic:${newTopic}, oldTopic:${oldTopic}, changer:${changer}, date:${date}`
         );
+        room.topic(newTopic);
       })
 
       .on("friendship", (friendship) => {
