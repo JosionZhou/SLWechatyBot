@@ -1,5 +1,5 @@
-import {log, ScanStatus, Wechaty, WechatyBuilder} from "wechaty";
-import {PuppetPadlocal} from "wechaty-puppet-padlocal";
+import { log, ScanStatus, Wechaty, WechatyBuilder } from "wechaty";
+import { PuppetPadlocal } from "wechaty-puppet-padlocal";
 import { dingDongBot, getMessagePayload, LOGPRE } from "./helper";
 import Logger from "./logger";
 import FileHelper from "./FileHelper";
@@ -84,33 +84,33 @@ class WechatyBot {
         // await dingDongBot(message);
         // console.log("RoomName:",message.room()?.toString());
         //if (this.bot.currentUser.id!=message.payload?.talkerId && message.room()?.payload?.topic == "IT_测试问题件处理") {
-          // console.log("CurrentUserId:", this.bot.currentUser.id);
-          // console.log("messageSenderId:", message.payload?.talkerId);
+        // console.log("CurrentUserId:", this.bot.currentUser.id);
+        // console.log("messageSenderId:", message.payload?.talkerId);
 
-          // console.log("消息内容：",message.text());
-          //接收消息自动提交到微信客服机器人
-          // let querybot = require("./wechatbot");
-          // let result = await querybot.QueryWechatBot(message.text(), (answer:string) => { 
-          //微信客服机器人回复的内容，再回复到客户
-          //   message.say(answer);
-          // });
-          // console.log("WechatBotQueryResult:",result);
-          
-          
-          // let testObj:SayToWechatData = {
-          //   SayType: 1,
-          //   RoomName: "IT_测试问题件处理",
-          //   Message: {
-          //     MessageType: WechatMessageType.Url,
-          //     UrlMessage: {
-          //         Description: `您好,单号:123456789,有问题:[待提供发票]需要处理。`,
-          //         ThumbnailUrl: "https://www.sl56.com/images/index-code.png",
-          //         Title: "问题件自助处理",
-          //         Url: "https://www.sl56.com/Problem/Link?data=5Nv2TmwC6cvH7nIwKgZHDE3oUv6WUGe5",
-          //     }
-          //   },
-          // };
-          // this.say(testObj);
+        // console.log("消息内容：",message.text());
+        //接收消息自动提交到微信客服机器人
+        // let querybot = require("./wechatbot");
+        // let result = await querybot.QueryWechatBot(message.text(), (answer:string) => { 
+        //微信客服机器人回复的内容，再回复到客户
+        //   message.say(answer);
+        // });
+        // console.log("WechatBotQueryResult:",result);
+
+
+        // let testObj:SayToWechatData = {
+        //   SayType: 1,
+        //   RoomName: "IT_测试问题件处理",
+        //   Message: {
+        //     MessageType: WechatMessageType.Url,
+        //     UrlMessage: {
+        //         Description: `您好,单号:123456789,有问题:[待提供发票]需要处理。`,
+        //         ThumbnailUrl: "https://www.sl56.com/images/index-code.png",
+        //         Title: "问题件自助处理",
+        //         Url: "https://www.sl56.com/Problem/Link?data=5Nv2TmwC6cvH7nIwKgZHDE3oUv6WUGe5",
+        //     }
+        //   },
+        // };
+        // this.say(testObj);
         //}
       })
 
@@ -137,7 +137,6 @@ class WechatyBot {
           LOGPRE,
           `on room-topic, room:${room}, newTopic:${newTopic}, oldTopic:${oldTopic}, changer:${changer}, date:${date}`
         );
-        room.topic(newTopic);
       })
 
       .on("friendship", (friendship) => {
@@ -180,7 +179,7 @@ class WechatyBot {
           description: reqData.Message.UrlMessage?.Description,
           thumbnailUrl: reqData.Message.UrlMessage?.ThumbnailUrl,
           title: reqData.Message.UrlMessage?.Title,
-          url:reqData.Message.UrlMessage?.Url
+          url: reqData.Message.UrlMessage?.Url
         });
         break;
     }
