@@ -84,8 +84,8 @@ class app {
                 logger.error(err + "");
             }
         });
-        exp.get("/rooms", function (req: any, res: any) {
-            var rooms = wechatyBot.getRooms();
+        exp.get("/rooms", async function (req: any, res: any) {
+            var rooms =await wechatyBot.getRooms();
             res.send(rooms);
         });
         exp.listen(AppSetting.Port, () => {
