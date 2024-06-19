@@ -84,6 +84,10 @@ class app {
                 logger.error(err + "");
             }
         });
+        exp.get("/rooms", function (req: any, res: any) {
+            var rooms = wechatyBot.getRooms();
+            res.send(rooms);
+        });
         exp.listen(AppSetting.Port, () => {
             logger.info(`服务启动成功.正在监听端口：${AppSetting.Port}`);
             console.log(`服务启动成功.正在监听端口：${AppSetting.Port}`);

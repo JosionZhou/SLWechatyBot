@@ -220,6 +220,10 @@ class WechatyBot {
       }
     }
   }
+  public async getRooms(){
+    let allRooms = await this.bot.Room.findAll();
+    return allRooms;
+  }
 
   private exit() {
     process.exit();
