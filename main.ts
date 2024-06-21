@@ -1,5 +1,5 @@
-import {log, ScanStatus, Wechaty, WechatyBuilder} from "wechaty";
-import {PuppetPadlocal} from "wechaty-puppet-padlocal";
+import { log, ScanStatus, Wechaty, WechatyBuilder } from "wechaty";
+import { PuppetPadlocal } from "wechaty-puppet-padlocal";
 import { dingDongBot, getMessagePayload, LOGPRE } from "./helper";
 import Logger from "./logger";
 import FileHelper from "./FileHelper";
@@ -76,7 +76,7 @@ class WechatyBot {
 
       .on("message", async (message) => {
         // console.log("接收消息：", message);
-        log.info(LOGPRE, `on message: ${message.toString()}`);
+        //log.info(LOGPRE, `on message: ${message.toString()}`);
         // logger.info(`OnMessage:${message.toString()}`);
 
         // await getMessagePayload(message);
@@ -84,33 +84,33 @@ class WechatyBot {
         // await dingDongBot(message);
         // console.log("RoomName:",message.room()?.toString());
         //if (this.bot.currentUser.id!=message.payload?.talkerId && message.room()?.payload?.topic == "IT_测试问题件处理") {
-          // console.log("CurrentUserId:", this.bot.currentUser.id);
-          // console.log("messageSenderId:", message.payload?.talkerId);
+        // console.log("CurrentUserId:", this.bot.currentUser.id);
+        // console.log("messageSenderId:", message.payload?.talkerId);
 
-          // console.log("消息内容：",message.text());
-          //接收消息自动提交到微信客服机器人
-          // let querybot = require("./wechatbot");
-          // let result = await querybot.QueryWechatBot(message.text(), (answer:string) => { 
-          //微信客服机器人回复的内容，再回复到客户
-          //   message.say(answer);
-          // });
-          // console.log("WechatBotQueryResult:",result);
-          
-          
-          // let testObj:SayToWechatData = {
-          //   SayType: 1,
-          //   RoomName: "IT_测试问题件处理",
-          //   Message: {
-          //     MessageType: WechatMessageType.Url,
-          //     UrlMessage: {
-          //         Description: `您好,单号:123456789,有问题:[待提供发票]需要处理。`,
-          //         ThumbnailUrl: "https://www.sl56.com/images/index-code.png",
-          //         Title: "问题件自助处理",
-          //         Url: "https://www.sl56.com/Problem/Link?data=5Nv2TmwC6cvH7nIwKgZHDE3oUv6WUGe5",
-          //     }
-          //   },
-          // };
-          // this.say(testObj);
+        // console.log("消息内容：",message.text());
+        //接收消息自动提交到微信客服机器人
+        // let querybot = require("./wechatbot");
+        // let result = await querybot.QueryWechatBot(message.text(), (answer:string) => { 
+        //微信客服机器人回复的内容，再回复到客户
+        //   message.say(answer);
+        // });
+        // console.log("WechatBotQueryResult:",result);
+
+
+        // let testObj:SayToWechatData = {
+        //   SayType: 1,
+        //   RoomName: "IT_测试问题件处理",
+        //   Message: {
+        //     MessageType: WechatMessageType.Url,
+        //     UrlMessage: {
+        //         Description: `您好,单号:123456789,有问题:[待提供发票]需要处理。`,
+        //         ThumbnailUrl: "https://www.sl56.com/images/index-code.png",
+        //         Title: "问题件自助处理",
+        //         Url: "https://www.sl56.com/Problem/Link?data=5Nv2TmwC6cvH7nIwKgZHDE3oUv6WUGe5",
+        //     }
+        //   },
+        // };
+        // this.say(testObj);
         //}
       })
 
@@ -179,12 +179,12 @@ class WechatyBot {
           description: reqData.Message.UrlMessage?.Description,
           thumbnailUrl: reqData.Message.UrlMessage?.ThumbnailUrl,
           title: reqData.Message.UrlMessage?.Title,
-          url:reqData.Message.UrlMessage?.Url
+          url: reqData.Message.UrlMessage?.Url
         });
         break;
     }
     if (reqData.SayType == 1) {
-      let roomNameReg = new RegExp(`.*${reqData.CustomerNo}`,"gi");
+      let roomNameReg = new RegExp(`.*#${reqData.CustomerNo}$`, "gi");
       let room = await this.bot.Room.find({ topic: roomNameReg });
       let allRooms = await this.bot.Room.findAll();
       if (!this.bot.isLoggedIn) {
@@ -204,8 +204,10 @@ class WechatyBot {
           throw new Error("当前用户不存在于聊天组,可能已被移出群聊");
         }
       } else {
-        console.log("allRoomsCount:", allRooms.length);
-        console.log("allRooms:", allRooms);
+        console.log("Rooms Count:", allRooms.length);
+        // allRooms.forEach(async room => {
+        //   console.log(await room.topic());
+        // });
         throw new Error(`找不到群名称后缀为:[${reqData.CustomerNo}]的群聊`);
       }
     } else {
@@ -217,6 +219,10 @@ class WechatyBot {
         throw new Error(`找不到名称为:[${reqData.CustomerName}]的联系人`);
       }
     }
+  }
+  public async getRooms(){
+    let allRooms = await this.bot.Room.findAll();
+    return allRooms;
   }
 
   private exit() {
